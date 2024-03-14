@@ -1,30 +1,59 @@
 # react-native-rn074-synthesize-issue
 
-demo for issue on rn 074
+Demo for issue on RN 0.74.
 
-## Installation
+This module contains a very simple code logging the bridge value:
+
+```obj-c
+@implementation Rn074SynthesizeIssue
+
+@synthesize bridge = _bridge;
+RCT_EXPORT_MODULE()
+
+// Example method
+// See // https://reactnative.dev/docs/native-modules-ios
+RCT_EXPORT_METHOD(multiply:(double)a
+                  b:(double)b
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+{
+    NSNumber *result = @(a * b);
+    NSLog(@"Bridge is: %@", _bridge.description);
+
+    resolve(result);
+}
+@end
+```
+
+When bridgeless mode is on, the bridge is null.
+
+## Setup
 
 ```sh
-npm install react-native-rn074-synthesize-issue
+yarn
+cd example
+yarn
+(cd ios && RCT_NEW_ARCH_ENABLED=1 pod install)
 ```
 
-## Usage
+## Reproducing the issue
 
-```js
-import { multiply } from 'react-native-rn074-synthesize-issue';
+Open the app on Xcode `(cd example/ && xed ios)`, then run the app.
 
-// ...
+When the app launches, in the Xcode logs you should see:
 
-const result = await multiply(3, 7);
+```
+Bridgeless mode is enabled
+Running "example
+Bridge is: (null)
 ```
 
-## Contributing
+When you turn bridgeless mode off by uncommenting the code in `AppDelegate.mm`, you get as expected:
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
-
-## License
-
-MIT
+```
+Running "example
+Bridge is: <RCTCxxBridge: 0x10540cb00>
+```
 
 ---
 
