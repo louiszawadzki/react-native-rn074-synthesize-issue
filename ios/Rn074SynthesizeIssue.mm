@@ -1,6 +1,8 @@
 #import "Rn074SynthesizeIssue.h"
 
 @implementation Rn074SynthesizeIssue
+
+@synthesize bridge = _bridge;
 RCT_EXPORT_MODULE()
 
 // Example method
@@ -11,6 +13,7 @@ RCT_EXPORT_METHOD(multiply:(double)a
                   reject:(RCTPromiseRejectBlock)reject)
 {
     NSNumber *result = @(a * b);
+    NSLog(@"Bridge is: %@", _bridge.description);
 
     resolve(result);
 }
