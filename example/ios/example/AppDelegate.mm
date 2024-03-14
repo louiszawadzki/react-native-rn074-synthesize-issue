@@ -6,7 +6,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  self.moduleName = @"Rn074SynthesizeIssueExample";
+  self.moduleName = @"example";
   // You can add your custom initial props in the dictionary below.
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
@@ -16,10 +16,10 @@
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
 {
-  return [self getBundleURL];
+  return [self bundleURL];
 }
 
-- (NSURL *)getBundleURL
+- (NSURL *)bundleURL
 {
 #if DEBUG
   return [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index"];
@@ -27,5 +27,11 @@
   return [[NSBundle mainBundle] URLForResource:@"main" withExtension:@"jsbundle"];
 #endif
 }
+
+// Uncomment below to turn on bridgeless mode
+//-(BOOL)bridgelessEnabled
+//{
+//  return NO;
+//}
 
 @end

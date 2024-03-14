@@ -1,7 +1,14 @@
-import * as React from 'react';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ *
+ * @format
+ */
 
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-rn074-synthesize-issue';
+import React from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+
+import {multiply} from 'react-native-rn074-synthesize-issue';
 
 export default function App() {
   const [result, setResult] = React.useState<number | undefined>();
